@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Investigación académica sobre AJAX y su funcionamiento.">
+    <title>Investigación sobre AJAX | UASD</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f1f4f8;
+            color: #263445;
+            line-height: 1.8;
+        }
+
+        header {
+            background: linear-gradient(135deg, #102b46, #1e527b);
+            color: white;
+            text-align: center;
+            padding: 45px 20px;
+            border-bottom: 5px solid #d5ad55;
+        }
+
+        header h1 {
+            font-size: 30px;
+            margin-bottom: 12px;
+        }
+
+        header p {
+            color: #e4eaf0;
+        }
+
+        .institucion {
+            font-size: 19px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .contenedor {
+            max-width: 1100px;
+            width: 92%;
+            margin: 30px auto;
+        }
+
+        .portada {
+            background: white;
+            padding: 40px 30px;
+            text-align: center;
+            border-radius: 12px;
+            border-top: 5px solid #d5ad55;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+            margin-bottom: 30px;
+        }
+
+        .portada h2 {
+            color: #153c5b;
+            margin: 20px 0;
+            font-size: 27px;
+        }
+
+        .portada .universidad {
+            color: #153c5b;
+            font-size: 21px;
+            font-weight: bold;
+        }
+
+        .datos {
+            max-width: 650px;
+            margin: 25px auto 0;
+            text-align: left;
+        }
+
+        .datos p {
+            border-bottom: 1px solid #e1e6ec;
+            padding: 8px 0;
+        }
+
+        nav {
+            background: #153c5b;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px 22px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        nav a:hover {
+            color: #e8c66f;
+        }
+
+        section {
+            background: white;
+            padding: 30px;
+            margin-bottom: 25px;
+            border-radius: 10px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.05);
+            scroll-margin-top: 20px;
+        }
+
+        section h2 {
+            color: #153c5b;
+            border-bottom: 2px solid #d5ad55;
+            padding-bottom: 10px;
+            margin-bottom: 18px;
+        }
+
+        section h3 {
+            color: #24577d;
+            margin: 18px 0 8px;
+        }
+
+        p {
+            margin-bottom: 14px;
+            text-align: justify;
+        }
+
+        ul, ol {
+            padding-left: 25px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .tabla {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .tabla th,
+        .tabla td {
+            border: 1px solid #d8e0e8;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .tabla th {
+            background: #153c5b;
+            color: white;
+        }
+
+        .tabla tr:nth-child(even) {
+            background: #f2f6fa;
+        }
+
+        pre {
+            background: #172536;
+            color: #e8f0f8;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 18px 0;
+            font-size: 14px;
+        }
+
+        code {
+            font-family: Consolas, monospace;
+        }
+
+        .ejemplo {
+            background: #eef5fa;
+            padding: 20px;
+            border-left: 4px solid #1e527b;
+            border-radius: 6px;
+            margin-top: 15px;
+        }
+
+        button {
+            background: #153c5b;
+            color: white;
+            padding: 12px 22px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 15px;
+            margin: 10px 0;
+        }
+
+        button:hover {
+            background: #24618d;
+        }
+
+        #resultado {
+            background: #f0f5f9;
+            border: 1px solid #d8e0e8;
+            border-radius: 7px;
+            padding: 15px;
+            margin-top: 12px;
+            min-height: 55px;
+        }
+
+        .referencias li {
+            margin-bottom: 12px;
+        }
+
+        footer {
+            background: #102b46;
+            color: white;
+            text-align: center;
+            padding: 25px 15px;
+            margin-top: 40px;
+        }
+
+        footer p {
+            text-align: center;
+            margin: 5px;
+        }
+
+        @media (max-width: 650px) {
+            header h1 {
+                font-size: 23px;
+            }
+
+            .portada {
+                padding: 25px 18px;
+            }
+
+            section {
+                padding: 20px 16px;
+            }
+
+            .tabla {
+                font-size: 13px;
+            }
+
+            .tabla th,
+            .tabla td {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="institucion">
+        UNIVERSIDAD AUTÓNOMA DE SANTO DOMINGO
+    </div>
+    <h1>INVESTIGACIÓN SOBRE AJAX</h1>
+    <p>Funcionamiento, características y aplicaciones en el desarrollo web</p>
+</header>
+
+<main class="contenedor">
+
+    <div class="portada">
+        <p class="universidad">
+            UNIVERSIDAD AUTÓNOMA DE SANTO DOMINGO (UASD)
+        </p>
+
+        <h2>TAREA 3: INVESTIGACIÓN SOBRE AJAX Y SU FUNCIONAMIENTO</h2>
+
+        <p>Facultad de Ciencias</p>
+        <p>Escuela de Informática</p>
+        <p>Licenciatura en Informática</p>
+
+        <div class="datos">
+            <p><strong>Asignatura:</strong> Laboratorio de Lenguaje de Programación III</p>
+            <p><strong>Estudiante:</strong> Bienvenido Quezada Alcántara</p>
+            <p><strong>Matrícula:</strong> BD6436</p>
+            <p><strong>Docente:</strong> Radhamés Silverio González</p>
+            <p><strong>Lugar:</strong> Santo Domingo, República Dominicana</p>
+            <p><strong>Fecha:</strong> 12 de noviembre de 2026</p>
+        </div>
+    </div>
+
+    <!-- MENÚ -->
+    <nav>
+        <ul>
+            <li><a href="#introduccion">Introducción</a></li>
+            <li><a href="#definicion">¿Qué es AJAX?</a></li>
+            <li><a href="#funcionamiento">Funcionamiento</a></li>
+            <li><a href="#componentes">Componentes</a></li>
+            <li><a href="#ventajas">Ventajas</a></li>
+            <li><a href="#usos">Aplicaciones</a></li>
+            <li><a href="#ejemplo">Ejemplo</a></li>
+            <li><a href="#conclusion">Conclusión</a></li>
+            <li><a href="#referencias">Referencias</a></li>
+        </ul>
+    </nav>
+
+    <section id="introduccion">
+        <h2>Introducción</h2>
+
+        <p>
+            AJAX es una técnica utilizada en el desarrollo web que permite
+            intercambiar información entre una página web y un servidor
+            sin necesidad de recargar completamente el documento.
+            Esta tecnología contribuye a crear aplicaciones más dinámicas,
+            rápidas e interactivas.
+        </p>
+
+        <p>
+            En esta investigación se explica qué es AJAX, su propósito,
+            funcionamiento, componentes principales, ventajas,
+            desventajas y aplicaciones en el desarrollo web moderno.
+            También se presenta un ejemplo práctico para comprender
+            cómo funciona esta tecnología.
+        </p>
+    </section>
+
+    <section id="definicion">
+        <h2>1. ¿Qué es AJAX?</h2>
+
+        <p>
+            AJAX significa Asynchronous JavaScript and XML
+            (JavaScript asíncrono y XML). Es un conjunto de técnicas
+            de desarrollo web que permite enviar y recibir información
+            desde un servidor de manera asíncrona.
+        </p>
+
+        <p>
+            Su característica principal es que permite actualizar
+            partes específicas de una página sin tener que recargar
+            todo el contenido.
+        </p>
+
+        <p>
+            Aunque su nombre incluye XML, actualmente AJAX también
+            puede trabajar con otros formatos de información,
+            especialmente JSON.
+        </p>
+    </section>
+
+    <!-- PROPÓSITO -->
+    <section id="proposito">
+        <h2>2. Propósito de AJAX</h2>
+
+        <p>El propósito principal de AJAX es mejorar la comunicación
+        entre el navegador y el servidor, permitiendo una experiencia
+        más rápida y cómoda para el usuario.</p>
+
+        <ul>
+            <li>Actualizar información sin recargar toda la página.</li>
+            <li>Mejorar la interactividad de las aplicaciones web.</li>
+            <li>Reducir solicitudes innecesarias de carga completa.</li>
+            <li>Enviar y recibir información del servidor.</li>
+            <li>Ofrecer una experiencia de navegación más fluida.</li>
+        </ul>
+    </section>
+
+    <section id="funcionamiento">
+        <h2>3. ¿Cómo funciona AJAX?</h2>
+
+        <p>
+            AJAX funciona mediante solicitudes asíncronas que permiten
+            al navegador comunicarse con un servidor mientras el usuario
+            continúa utilizando la página.
+        </p>
+
+        <ol>
+            <li>El usuario realiza una acción en la página web.</li>
+            <li>JavaScript detecta esa acción.</li>
+            <li>El navegador envía una solicitud al servidor.</li>
+            <li>El servidor procesa la solicitud.</li>
+            <li>El servidor devuelve una respuesta.</li>
+            <li>JavaScript recibe los datos y actualiza una parte de la página.</li>
+        </ol>
+
+        <div class="ejemplo">
+            <strong>Ejemplo:</strong>
+            cuando una persona escribe en un buscador y aparecen
+            sugerencias sin recargar la página, puede estar utilizando AJAX.
+        </div>
+    </section>
+
+    <section id="componentes">
+        <h2>4. Componentes principales de AJAX</h2>
+
+        <table class="tabla">
+            <thead>
+                <tr>
+                    <th>Componente</th>
+                    <th>Función</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>HTML</td>
+                    <td>Define la estructura de la página web.</td>
+                </tr>
+                <tr>
+                    <td>CSS</td>
+                    <td>Controla el diseño y la presentación.</td>
+                </tr>
+                <tr>
+                    <td>JavaScript</td>
+                    <td>Controla las acciones y solicitudes asíncronas.</td>
+                </tr>
+                <tr>
+                    <td>DOM</td>
+                    <td>Permite modificar el contenido de la página.</td>
+                </tr>
+                <tr>
+                    <td>XMLHttpRequest o Fetch</td>
+                    <td>Permite realizar solicitudes al servidor.</td>
+                </tr>
+                <tr>
+                    <td>Servidor</td>
+                    <td>Procesa las solicitudes y devuelve información.</td>
+                </tr>
+                <tr>
+                    <td>JSON o XML</td>
+                    <td>Son formatos utilizados para intercambiar datos.</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section id="ventajas">
+        <h2>5. Ventajas y desventajas de AJAX</h2>
+
+        <h3>Ventajas</h3>
+        <ul>
+            <li>Permite actualizar partes de una página sin recargarla.</li>
+            <li>Mejora la experiencia del usuario.</li>
+            <li>Facilita la comunicación con los servidores.</li>
+            <li>Permite desarrollar aplicaciones web interactivas.</li>
+            <li>Puede reducir la cantidad de información que se necesita volver a cargar.</li>
+        </ul>
+
+        <h3>Desventajas</h3>
+        <ul>
+            <li>Depende de JavaScript para su funcionamiento en el navegador.</li>
+            <li>Requiere manejar adecuadamente los errores de comunicación.</li>
+            <li>Puede presentar dificultades de accesibilidad si se implementa incorrectamente.</li>
+            <li>Necesita medidas de seguridad al intercambiar información.</li>
+        </ul>
+    </section>
+
+    <section id="comparacion">
+        <h2>6. Diferencia entre una página tradicional y AJAX</h2>
+
+        <table class="tabla">
+            <thead>
+                <tr>
+                    <th>Página tradicional</th>
+                    <th>Página con AJAX</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>Puede necesitar recargar toda la página.</td>
+                    <td>Puede actualizar solamente una sección.</td>
+                </tr>
+                <tr>
+                    <td>La interacción puede ser menos fluida.</td>
+                    <td>Permite interacciones más dinámicas.</td>
+                </tr>
+                <tr>
+                    <td>El navegador solicita una nueva página completa.</td>
+                    <td>Puede solicitar solamente los datos necesarios.</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section id="usos">
+        <h2>7. Aplicaciones de AJAX en la actualidad</h2>
+
+        <p>
+            AJAX se utiliza en diferentes tipos de aplicaciones web
+            para mejorar la interacción y facilitar el intercambio
+            de información.
+        </p>
+
+        <ul>
+            <li>Buscadores con sugerencias automáticas.</li>
+            <li>Formularios que validan datos sin recargar la página.</li>
+            <li>Aplicaciones de correo electrónico.</li>
+            <li>Redes sociales.</li>
+            <li>Carritos de compras en tiendas virtuales.</li>
+            <li>Paneles administrativos y sistemas de información.</li>
+            <li>Aplicaciones que consultan datos desde una API.</li>
+        </ul>
+    </section>
+
+  
+    <section id="ejemplo">
+        <h2>8. Ejemplo práctico de AJAX</h2>
+
+        <p>
+            El siguiente ejemplo utiliza JavaScript y Fetch para
+            consultar información de un usuario desde una API.
+            Los datos se muestran en la página sin recargarla.
+        </p>
+
+        <div class="ejemplo">
+            <h3>Consulta de información de un usuario</h3>
+
+            <p>
+                Presiona el botón para consultar los datos de ejemplo
+                desde un servicio externo.
+            </p>
+
+            <button type="button" onclick="consultarUsuario()">
+                Consultar usuario
+            </button>
+
+            <div id="resultado" aria-live="polite">
+                Aquí aparecerá la información del usuario.
+            </div>
+        </div>
+
+        <h3>Código JavaScript utilizado</h3>
+
+        <pre><code>async function consultarUsuario() {
+    const resultado = document.getElementById("resultado");
+
+    resultado.textContent = "Consultando información...";
+
+    try {
+        const respuesta = await fetch(
+            "https://jsonplaceholder.typicode.com/users/1"
+        );
+
+        if (!respuesta.ok) {
+            throw new Error("No fue posible obtener los datos.");
+        }
+
+        const usuario = await respuesta.json();
+
+        resultado.textContent =
+            "Nombre: " + usuario.name +
+            " | Correo: " + usuario.email +
+            " | Ciudad: " + usuario.address.city;
+
+    } catch (error) {
+        resultado.textContent = "Error: " + error.message;
+    }
+}</code></pre>
+
+        <p>
+            En este ejemplo, Fetch realiza una solicitud al servidor.
+            La respuesta se convierte en formato JSON y JavaScript
+            muestra los datos en el elemento HTML correspondiente.
+        </p>
+    </section>
+
+    <section id="conclusion">
+        <h2>Conclusión</h2>
+
+        <p>
+            AJAX representa una técnica importante en el desarrollo
+            de aplicaciones web porque permite intercambiar información
+            entre el navegador y el servidor sin tener que recargar
+            completamente una página.
+        </p>
+
+        <p>
+            Su utilización mejora la interactividad, facilita la
+            actualización de datos y contribuye a ofrecer una experiencia
+            más dinámica para los usuarios. Aunque han surgido nuevas
+            herramientas y tecnologías, los principios de AJAX siguen
+            siendo relevantes en el desarrollo web moderno.
+        </p>
+    </section>
+
+    <!-- REFERENCIAS -->
+    <section id="referencias">
+        <h2>Referencias bibliográficas</h2>
+
+        <ul class="referencias">
+            <li>
+                MDN Web Docs. (s. f.). 
+                <em>AJAX - Getting Started.</em>
+                <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/AJAX/Getting_Started" target="_blank" rel="noopener">
+                    https://developer.mozilla.org/
+                </a>
+            </li>
+
+            <li>
+                MDN Web Docs. (s. f.).
+                <em>Fetch API.</em>
+                <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API" target="_blank" rel="noopener">
+                    https://developer.mozilla.org/
+                </a>
+            </li>
+
+            <li>
+                WHATWG. (s. f.).
+                <em>Fetch Standard.</em>
+                <a href="https://fetch.spec.whatwg.org/" target="_blank" rel="noopener">
+                    https://fetch.spec.whatwg.org/
+                </a>
+            </li>
+
+            <li>
+                W3C. (s. f.).
+                <em>Document Object Model (DOM).</em>
+                <a href="https://www.w3.org/DOM/" target="_blank" rel="noopener">
+                    https://www.w3.org/DOM/
+                </a>
+            </li>
+        </ul>
+    </section>
+
+</main>
+
+<footer>
+    <p><strong>Universidad Autónoma de Santo Domingo (UASD)</strong></p>
+    <p>Facultad de Ciencias · Escuela de Informática</p>
+    <p>Investigación sobre AJAX y su funcionamiento</p>
+    <p>© 2026 - Bienvenido Quezada Alcántara</p>
+</footer>
+
+<script>
+    async function consultarUsuario() {
+        const resultado = document.getElementById("resultado");
+
+        resultado.textContent = "Consultando información...";
+
+        try {
+            const respuesta = await fetch(
+                "https://jsonplaceholder.typicode.com/users/1"
+            );
+
+            if (!respuesta.ok) {
+                throw new Error("No fue posible obtener los datos.");
+            }
+
+            const usuario = await respuesta.json();
+
+            resultado.textContent =
+                "Nombre: " + usuario.name +
+                " | Correo: " + usuario.email +
+                " | Ciudad: " + usuario.address.city;
+
+        } catch (error) {
+            resultado.textContent =
+                "Error al consultar los datos: " + error.message;
+        }
+    }
+</script>
+
+</body>
+</html>
